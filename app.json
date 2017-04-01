@@ -2,7 +2,7 @@
   "name": "Discord Quoter Bot",
   "version": "0.0.1",
   "description": "Selfbot for quoting other Discord users using commands.",
-  "repository": "",
+  "repository": "https://github.com/kelvinss/node-discord-quoter-bot",
   "logo": "",
   "keywords": ["node", "bot", "discord"],
   "engines": {
@@ -20,6 +20,12 @@
     "PREFIX": {
       "description": "Bot commands prefix",
       "value": "$"
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
     }
   }
 }
