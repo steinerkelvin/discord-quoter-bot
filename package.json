@@ -1,0 +1,23 @@
+{
+  "name": "discord-quoter-bot",
+  "version": "0.0.1",
+  "description": "Selfbot for quoting other Discord users using commands.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "coffee -o ./build/ -mc ./src/",
+    "start": "node --harmony ./build/bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "Kelvin Santos",
+  "license": "",
+  "dependencies": {
+    "coffee-script": "^1.12.4",
+    "discord.js": "^11.0.0",
+    "moment": "^2.18.1",
+    "os-locale": "^2.0.0"
+  }
+}

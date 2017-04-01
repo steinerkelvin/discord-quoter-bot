@@ -1,0 +1,25 @@
+{
+  "name": "Discord Quoter Bot",
+  "version": "0.0.1",
+  "description": "Selfbot for quoting other Discord users using commands.",
+  "repository": "",
+  "logo": "",
+  "keywords": ["node", "bot", "discord"],
+  "engines": {
+    "node": "7.6.0"
+  },
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "Discord account token.",
+      "required": true
+    },
+    "LOCALE": {
+      "description": "Locale",
+      "value": "en"
+    },
+    "PREFIX": {
+      "description": "Bot commands prefix",
+      "value": "$"
+    }
+  }
+}
