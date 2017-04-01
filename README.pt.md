@@ -1,8 +1,11 @@
+
 <div align="center">
 
 # Bot Citador para Discord
 
 Cite outros usuários do Discord usando comandos.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ![demo GIF](https://raw.githubusercontent.com/kelvinss/node-discord-quoter-bot/master/readme/pt_demo.gif)
 
