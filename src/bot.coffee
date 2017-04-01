@@ -39,7 +39,7 @@ class App
     @init_normal_bot()
     @init_user_bot()
 
-  # inicia o bot normal
+  # inits dedicated bot
   init_normal_bot: () =>
     @bot_client = new (Discord.Client)
     @bot_client.on 'error', (err) ->
@@ -48,7 +48,7 @@ class App
       console.log 'Normal bot ready'
     @bot_client.login @vars.DISCORD_BOT_TOKEN
 
-  # inicia o bot de usuário
+  # inits user bot
   init_user_bot: () =>
     @client = new (Discord.Client)
 
@@ -63,12 +63,12 @@ class App
 
     @client.login @vars.DISCORD_USER_TOKEN
 
-  # envia uma mensagem para o usuário através do bot
+  # sends message to user through the dedicated bot
   send_self_message: (txt) =>
     @bot_client.fetchUser(@client.user.id).then (user) ->
       return user.sendMessage(txt)
 
-  # constroi um string com nome do canal, servidor(guild), e horário
+  # builds a string with channel and server(guild) names and timestamp
   build_message_footer: (message, showGuild=false) =>
     channel = message.channel
     footer = []
@@ -79,14 +79,13 @@ class App
     footer.push moment( message.createdTimestamp ).calendar()+"\n"
     return footer.join(" — ")
 
-  # lida com todas mensagens recebidas ou atualizadas
+  # handles all sent or updated messages
   handle_message: (message, old_message=null) =>
-    # prossegue apenas se o remetente for o próprio usuário
+    # only proceeds if sender is the user himself
     if message.author == @client.user
       args = message.content.split(" ")
       cmd = args.shift()
 
-      # testa se a mensagem começa com um dos comandos disponíveis
       switch cmd
         when @prefix+'ping'
           message.reply 'pong'
@@ -95,7 +94,7 @@ class App
         when @prefix+'q@'
           @do_quote(message, args, cite=true)
 
-  # recria ou edita uma mensagem do usuário citando a mensagem com ID igual ao primeiro argumento (em 'args')
+  # resends or edits a message quoting the message with ID that equals the fisrt argument (in 'args')
   do_quote: (message, args=[], cite=false, edit=false) =>
     if not msg_id = args.shift()
       console.log "Missing parameter"
@@ -104,11 +103,11 @@ class App
 
     channel = message.channel
 
-    # busca mensagens com determinado ID e seleciona a primeira
+    # search messages with given ID and returns the first one
     channel.fetchMessages({ limit: 1, around: msg_id }).then (qt_msg) =>
         qt_msg = qt_msg.first()
 
-        # se não existe mensagem, envia mensagem para o usuário e para
+        # if there is no message, send a error message to the user
         if not qt_msg
           console.warn "Message ID `#{msg_id}` not found"
 
@@ -125,16 +124,16 @@ class App
           @send_self_message(err_msg).then( ()-> message.delete() )
           return
 
-        # junta os argumentos restantes para serem o corpo da mensagem
+        # joins the remaining arguments to make the message body
         res_text = args.join " "
 
-        # se a mensagem está em um servidor (guild)
+        # checks if message is in a server (guild)
         if channel.guild
           member = channel.guild.member(qt_msg.author)
           author_name = member.nickname
           color = member.highestRole?.color  # adiciona cor de cargo
 
-          # se a citação está habilitada e adiciona uma citação ao usuário original se já não foi citado
+          # adds a citation to quoted message's user if it's enabled
           if  cite  and  res_text.search(member.toString()) == -1
             res_text = "#{member.toString()}" + if res_text then ", #{res_text}" else ""
 
@@ -143,7 +142,7 @@ class App
         timestamp = moment( qt_msg.createdTimestamp ).calendar()
 
         footer = []
-        # adiciona nome do canal se existir (se a mensagem estiver em um servidor)   # TODO DM group
+        # adds channel name to footer if it exists
         if (name = channel.name) then footer.push CHANNEL_STRING+"\##{channel.name}"
         footer.push "#{timestamp}"
 
@@ -154,7 +153,7 @@ class App
                 icon_url: qt_msg.author.avatarURL
               description: "#{qt_msg.content}"
               footer:
-                text: footer.join " "  #  — #{channel.guild.name}
+                text: footer.join " "
               color: color
               image: {url: null}
               fields: []
