@@ -8,8 +8,12 @@
     "node": "7.6.0"
   },
   "env": {
-    "SECRET_TOKEN": {
-      "description": "Discord account token.",
+    "DISCORD_BOT_TOKEN": {
+      "description": "Discord dedicated bot token",
+      "required": true
+    },
+    "DISCORD_USER_TOKEN": {
+      "description": "Discord account token",
       "required": true
     },
     "LOCALE": {
