@@ -1,11 +1,4 @@
 
-###
-TODO
-* clean code
-* fix quote on group DM
-* error message localization
-###
-
 lg = console.log.bind console
 
 Discord = require 'discord.js'
