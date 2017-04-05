@@ -75,7 +75,7 @@ class App
   # handles all sent or updated messages
   handle_message: (message, old_message=null) =>
     # only proceeds if sender is the user himself
-    if message.author == @client.user
+    if message.author.id == @client.user.id
       args = message.content.split(" ")
       cmd = args.shift()
 
@@ -107,11 +107,6 @@ class App
           err_msg = "Message ID '#{msg_id}' not found. Original message:\n"
           err_msg += "`#{message.content}`\n"
 
-          # stamp = []
-          # if (name = channel?.name) then stamp.push CHANNEL_STRING+"\##{name}"  # TODO modularize this
-          # if (guild = channel?.guild) then stamp.push "\##{guild?.name}"
-          # stamp.push moment( message.createdTimestamp ).calendar()+"\n"
-          # err_msg += stamp.join(" — ")
           err_msg += @build_message_footer(message, showGuild=true)
 
           @send_self_message(err_msg).then( ()-> message.delete() )
