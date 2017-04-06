@@ -1,5 +1,8 @@
 
 lg = console.log.bind console
+lgErr = (err) -> console.error "#{err?.stack or err}"
+
+# process.on('unhandledRejection', console.error);
 
 Discord = require 'discord.js'
 moment = require 'moment'
@@ -60,6 +63,7 @@ class App
   send_self_message: (txt) =>
     @bot_client.fetchUser(@client.user.id).then (user) ->
       return user.sendMessage(txt)
+    , (reason)->lgErr(reason)
 
   # builds a string with channel and server(guild) names and timestamp
   build_message_footer: (message, showGuild=false) =>
@@ -109,7 +113,7 @@ class App
 
           err_msg += @build_message_footer(message, showGuild=true)
 
-          @send_self_message(err_msg).then( ()-> message.delete() )
+          @send_self_message(err_msg).then( (()->message.delete()), (reason)->lgErr(reason) )
           return
 
         # joins the remaining arguments to make the message body
@@ -161,11 +165,14 @@ class App
         if edit
           message.edit(res_text, opts).then (res_message)->
             lg "Message updated: #{res_message.content}"
+          , (reason)->lgErr(reason)
         else
           channel.sendMessage(res_text, opts).then (res_message) ->
             lg "Sent message: #{res_message.content}"
             message.delete()
+          , (reason)->lgErr(reason)
 
+    , (reason)->lgErr(reason)
 
 if !module.parent
   bot = new App(vars)
