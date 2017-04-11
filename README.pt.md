@@ -34,7 +34,7 @@ _Resultado_
 
 * Crie um bot na [dashbord do Discord](https://discordapp.com/developers/applications) e [obtenha o token de acesso](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&amp;-getting-a-token)
 * Obtenha o token de acesso da sua própria conta
-  * Aperte `Ctrl+Shift+I` no seu Discord selecione a aba `Applications`. (caso não apareça, clique na seta `»`)
+  * Aperte `Ctrl+Shift+I` no seu Discord selecione a aba `Application`. (caso não apareça, clique na seta `»`)
   * Abra o `Local Storage` e procure pelo item chamado "token" na lista.
 
 ### Como configurar no Heroku (nuvem)
