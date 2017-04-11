@@ -5,7 +5,7 @@
 
 Cite outros usuários do Discord usando comandos.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/kelvinss/node-discord-quoter-bot)
 
 ![demo GIF](https://raw.githubusercontent.com/kelvinss/node-discord-quoter-bot/master/readme/pt_demo.gif)
 
@@ -40,7 +40,7 @@ _Resultado_
 ### Como configurar no Heroku (nuvem)
 
 * Crie e logue em sua conta em [heroku.com](https://signup.heroku.com/)
-* Clique no botão "Deploy to Heroku" (ou [neste link](https://heroku.com/deploy))
+* Clique no botão "Deploy to Heroku" (ou [neste link](https://heroku.com/deploy?template=https://github.com/kelvinss/node-discord-quoter-bot))
 * Dê um nome qualquer para seu app do Heroku
 * Informe as variáveis de configuração:
   * `DISCORD_BOT_TOKEN`: o token do bot obtido na dashboard no discord
