@@ -7,18 +7,22 @@ lgErr = (err) -> console.error "#{err?.stack or err}"
 Discord = require 'discord.js'
 moment = require 'moment'
 
-{get_env, get_env_check} = require './util'
+{idt, get_env, get_env_check, isTrue, strNumberToSubscript} = require './util'
 
 vars = {}
 Object.assign(vars, get_env_check( ['LOCALE', 'DISCORD_BOT_TOKEN', 'DISCORD_USER_TOKEN'] ))
-Object.assign(vars, get_env( ['PREFIX'] ))
+Object.assign(vars, get_env( ['PREFIX', 'SHOW_USER_DISCRIMINATOR'] ))
 
 moment.locale(vars.LOCALE)
 
+SHOW_USER_DISCRIMINATOR = isTrue vars.SHOW_USER_DISCRIMINATOR
 
 
 CHANNEL_STRING = "in "
 if vars.LOCALE in ['pt', 'pt-BR'] then CHANNEL_STRING = "em "
+
+SERVER_STRING = "at "
+if vars.LOCALE in ['pt', 'pt-BR'] then SERVER_STRING = "@ "
 
 IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png', 'webp', 'gif']
 
@@ -52,7 +56,7 @@ class App
       console.log 'User bot ready'
 
     @client.on 'message', @handle_message
-    @client.on 'messageUpdate', @handle_message
+    @client.on 'messageUpdate', ((o,n) => @handle_message(n))
 
     @client.on 'error', (err) ->
       console.error "#{ err?.stack or err }"
@@ -72,8 +76,9 @@ class App
     if (name = channel?.name)
       footer.push CHANNEL_STRING+"\##{name}"
     if (showGuild and guild = channel?.guild)
-      footer.push "\##{guild?.name}"
-    footer.push moment( message.createdTimestamp ).calendar()+"\n"
+      footer.push "#{SERVER_STRING}#{guild?.name}"
+    footer = [ footer.join(" ") ].filter idt
+    footer.push moment( message.createdTimestamp ).calendar()
     return footer.join(" — ")
 
   # handles all sent or updated messages
@@ -92,7 +97,7 @@ class App
           @do_quote(message, args, cite=true)
 
   # resends or edits a message quoting the message with ID that equals the fisrt argument (in 'args')
-  do_quote: (message, args=[], cite=false, edit=false) =>
+  do_quote: (message, args=[], cite=false, edit=true) =>
     if not msg_id = args.shift()
       console.log "Missing parameter"
       # TODO add message for user
@@ -131,12 +136,8 @@ class App
 
         author_name ?= qt_msg.author.username
 
-        timestamp = moment( qt_msg.createdTimestamp ).calendar()
-
-        footer = []
-        # adds channel name to footer if it exists
-        if (name = channel.name) then footer.push CHANNEL_STRING+"\##{channel.name}"
-        footer.push "#{timestamp}"
+        if (discriminator = qt_msg.author.discriminator)
+          author_name += " " + strNumberToSubscript(discriminator)
 
         opts =
           embed:
@@ -145,7 +146,7 @@ class App
                 icon_url: qt_msg.author.avatarURL
               description: "#{qt_msg.content}"
               footer:
-                text: footer.join " "
+                text: @build_message_footer(message)
               color: color
               image: {url: null}
               fields: []
@@ -161,6 +162,10 @@ class App
               opts.embed.image.url = url
               return true
         )
+
+        # passing a empty string to `.edit` makes discord.js think the message
+        # has the old body for some reason, and the handle function loops endlessly
+        res_text or= "·"  #"."
 
         if edit
           message.edit(res_text, opts).then (res_message)->

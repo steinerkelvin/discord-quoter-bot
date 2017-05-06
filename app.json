@@ -1,6 +1,6 @@
 {
   "name": "Discord Quoter Bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Selfbot for quoting other Discord users using commands.",
   "repository": "https://github.com/kelvinss/node-discord-quoter-bot",
   "keywords": ["node", "bot", "discord"],
@@ -23,6 +23,10 @@
     "PREFIX": {
       "description": "Bot commands prefix",
       "value": "$"
+    },
+    "SHOW_USER_DISCRIMINATOR": {
+      "description": "Show quoted user's discrimitador number next to nickname.",
+      "value": "true"
     }
   },
   "formation": {
