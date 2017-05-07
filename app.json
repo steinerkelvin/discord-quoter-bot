@@ -28,6 +28,10 @@
       "description": "Date format.",
       "value": "calendar"
     },
+    "TIMEZONE": {
+      "description": "Timezone. https://en.wikipedia.org/wiki/List_of_tz_database_time_zones",
+      "value": "UTC"
+    },
     "EMPTY_MESSAGE": {
       "description": "String that replaces message body when no text passed to command.",
       "value": ""

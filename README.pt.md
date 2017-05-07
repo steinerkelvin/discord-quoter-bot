@@ -47,6 +47,10 @@ _Resultado_
   * `DISCORD_USER_TOKEN`: o token da sua conta
   * `LOCALE`:  substituir "en" por "pt-BR"
   * `PREFIX`: prefixo do comando, o padrão é `$`
+  * `DATE_FORMAT`:  [formato de data](https://momentjs.com/docs/#/displaying/format/) (padrão: `calendar`)
+    - e.g. `DD/MM/YYYY HH:mm Z` resulta em `07/05/2017 08:52 -03:00`
+  * `TIMEZONE`: [fuso horário](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (default: `UTC`)
+    - e.g. `America/Sao_Paulo`
 * Deploy
 
 OBS.: uma conta gratuita no Heroku recebe 550 horas por mês, o que não é suficiente para rodar um aplicativo o mês inteiro. Para aumentar para 1000 horas basta [verificar um cartão de crédito](https://devcenter.heroku.com/articles/account-verification#how-to-verify-your-heroku-account) (sem pagar nada).

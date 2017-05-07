@@ -11,7 +11,7 @@
 
   Discord = require('discord.js');
 
-  moment = require('moment');
+  moment = require('moment-timezone');
 
   ref = require('./util'), idt = ref.idt, get_env = ref.get_env, get_env_check = ref.get_env_check, isTrue = ref.isTrue, strNumberToSubscript = ref.strNumberToSubscript;
 
@@ -19,7 +19,7 @@
 
   Object.assign(vars, get_env_check(['LOCALE', 'DISCORD_BOT_TOKEN', 'DISCORD_USER_TOKEN']));
 
-  Object.assign(vars, get_env(['PREFIX', 'DATE_FORMAT', 'SHOW_USER_DISCRIMINATOR', 'EMPTY_MESSAGE']));
+  Object.assign(vars, get_env(['PREFIX', 'DATE_FORMAT', 'TIMEZONE', 'SHOW_USER_DISCRIMINATOR', 'EMPTY_MESSAGE']));
 
   moment.locale(vars.LOCALE);
 
@@ -58,6 +58,7 @@
       this.init_normal_bot = bind(this.init_normal_bot, this);
       this.prefix = (ref3 = this.vars.PREFIX) != null ? ref3 : "$";
       this.DATE_FORMAT = vars.DATE_FORMAT || "calendar";
+      this.TIMEZONE = vars.TIMEZONE || "UTC";
       this.EMPTY_MESSAGE = vars.EMPTY_MESSAGE || "";
       this.SHOW_USER_DISCRIMINATOR = isTrue(vars.SHOW_USER_DISCRIMINATOR);
       this.init_normal_bot();
@@ -108,7 +109,7 @@
       if (this.DATE_FORMAT === "calendar") {
         return moment(timestamp).calendar();
       }
-      return moment(timestamp).format(this.DATE_FORMAT);
+      return moment(timestamp).tz(this.TIMEZONE).format(this.DATE_FORMAT);
     };
 
     App.prototype.build_message_footer = function(message, showGuild) {

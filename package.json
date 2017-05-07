@@ -2,6 +2,9 @@
   "name": "discord-quoter-bot",
   "version": "0.0.3",
   "description": "Selfbot for quoting other Discord users using commands.",
+  "repository": "kelvinss/node-discord-quoter-bot",
+  "homepage": "https://github.com/kelvinss/node-discord-quoter-bot",
+  "bugs": "https://github.com/kelvinss/node-discord-quoter-bot/issues",
   "main": "index.js",
   "scripts": {
     "postinstall": "coffee -o ./build/ -mc ./src/",
@@ -17,7 +20,7 @@
   "dependencies": {
     "coffee-script": "^1.12.4",
     "discord.js": "^11.0.0",
-    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "os-locale": "^2.0.0"
   }
 }
