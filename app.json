@@ -1,6 +1,6 @@
 {
   "name": "Discord Quoter Bot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Selfbot for quoting other Discord users using commands.",
   "repository": "https://github.com/kelvinss/node-discord-quoter-bot",
   "keywords": ["node", "bot", "discord"],
@@ -24,8 +24,16 @@
       "description": "Bot commands prefix",
       "value": "$"
     },
+    "DATE_FORMAT": {
+      "description": "Date format.",
+      "value": "calendar"
+    },
+    "EMPTY_MESSAGE": {
+      "description": "String that replaces message body when no text passed to command.",
+      "value": ""
+    },
     "SHOW_USER_DISCRIMINATOR": {
-      "description": "Show quoted user's discrimitador number next to nickname.",
+      "description": "Show quoted user's discriminator number next to nickname.",
       "value": "true"
     }
   },
