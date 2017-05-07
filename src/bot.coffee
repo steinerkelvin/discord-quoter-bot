@@ -11,11 +11,12 @@ moment = require 'moment'
 
 vars = {}
 Object.assign(vars, get_env_check( ['LOCALE', 'DISCORD_BOT_TOKEN', 'DISCORD_USER_TOKEN'] ))
-Object.assign(vars, get_env( ['PREFIX', 'SHOW_USER_DISCRIMINATOR'] ))
+Object.assign(vars, get_env( ['PREFIX', 'SHOW_USER_DISCRIMINATOR', 'EMPTY_MESSAGE_STRING'] ))
 
 moment.locale(vars.LOCALE)
 
 SHOW_USER_DISCRIMINATOR = isTrue vars.SHOW_USER_DISCRIMINATOR
+EMPTY_MESSAGE_STRING = vars.EMPTY_MESSAGE_STRING ? ""
 
 
 DISCRIMINATOR_STRING = " #"
@@ -165,9 +166,7 @@ class App
               return true
         )
 
-        # passing a empty string to `.edit` makes discord.js think the message
-        # has the old body for some reason, and the handle function loops endlessly
-        res_text or= "·"  #"."
+        res_text or= EMPTY_MESSAGE_STRING
 
         if edit
           message.edit(res_text, opts).then (res_message)->

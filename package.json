@@ -1,6 +1,6 @@
 {
   "name": "discord-quoter-bot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Selfbot for quoting other Discord users using commands.",
   "main": "index.js",
   "scripts": {
