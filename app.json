@@ -24,13 +24,17 @@
       "description": "Bot commands prefix",
       "value": "$"
     },
-    "SHOW_USER_DISCRIMINATOR": {
-      "description": "Show quoted user's discrimitador number next to nickname.",
-      "value": "true"
+    "DATE_FORMAT": {
+      "description": "Date format.",
+      "value": "calendar"
     },
-    "EMPTY_MESSAGE_STRING": {
+    "EMPTY_MESSAGE": {
       "description": "String that replaces message body when no text passed to command.",
       "value": ""
+    },
+    "SHOW_USER_DISCRIMINATOR": {
+      "description": "Show quoted user's discriminator number next to nickname.",
+      "value": "true"
     }
   },
   "formation": {

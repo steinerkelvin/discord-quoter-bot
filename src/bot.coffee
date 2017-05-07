@@ -11,12 +11,9 @@ moment = require 'moment'
 
 vars = {}
 Object.assign(vars, get_env_check( ['LOCALE', 'DISCORD_BOT_TOKEN', 'DISCORD_USER_TOKEN'] ))
-Object.assign(vars, get_env( ['PREFIX', 'SHOW_USER_DISCRIMINATOR', 'EMPTY_MESSAGE_STRING'] ))
+Object.assign(vars, get_env( ['PREFIX', 'DATE_FORMAT', 'SHOW_USER_DISCRIMINATOR', 'EMPTY_MESSAGE'] ))
 
 moment.locale(vars.LOCALE)
-
-SHOW_USER_DISCRIMINATOR = isTrue vars.SHOW_USER_DISCRIMINATOR
-EMPTY_MESSAGE_STRING = vars.EMPTY_MESSAGE_STRING ? ""
 
 
 DISCRIMINATOR_STRING = " #"
@@ -39,6 +36,10 @@ isImage = (url) ->
 class App
   constructor: (@vars) ->
     @prefix = @vars.PREFIX ? "$"
+    @DATE_FORMAT = vars.DATE_FORMAT or "calendar"
+    @EMPTY_MESSAGE = vars.EMPTY_MESSAGE or ""
+    @SHOW_USER_DISCRIMINATOR = isTrue vars.SHOW_USER_DISCRIMINATOR
+
     @init_normal_bot()
     @init_user_bot()
 
@@ -72,6 +73,11 @@ class App
       return user.sendMessage(txt)
     , (reason)->lgErr(reason)
 
+  buildDateString: (timestamp) =>
+    if @DATE_FORMAT == "calendar"
+      return moment( timestamp ).calendar()
+    return moment( timestamp ).format(@DATE_FORMAT)
+
   # builds a string with channel and server(guild) names and timestamp
   build_message_footer: (message, showGuild=false) =>
     channel = message.channel
@@ -81,7 +87,7 @@ class App
     if (showGuild and guild = channel?.guild)
       footer.push "#{SERVER_STRING}#{guild?.name}"
     footer = [ footer.join(" ") ].filter idt
-    footer.push moment( message.createdTimestamp ).calendar()
+    footer.push @buildDateString message.createdTimestamp
     return footer.join(" — ")
 
   # handles all sent or updated messages
@@ -139,7 +145,7 @@ class App
 
         author_name ?= qt_msg.author.username
 
-        if (SHOW_USER_DISCRIMINATOR and discriminator = qt_msg.author.discriminator)
+        if (@SHOW_USER_DISCRIMINATOR and discriminator = qt_msg.author.discriminator)
           author_name += DISCRIMINATOR_STRING + strNumberToSubscript(discriminator)
 
         opts =
@@ -166,7 +172,7 @@ class App
               return true
         )
 
-        res_text or= EMPTY_MESSAGE_STRING
+        res_text or= @EMPTY_MESSAGE
 
         if edit
           message.edit(res_text, opts).then (res_message)->
