@@ -7,10 +7,16 @@ Selfbot for quoting other Discord users using commands.
 Command: `$q <message ID> [reply content]`
 
 Config variables
-* `DISCORD_BOT_TOKEN`:  deficated bot token
-* `DISCORD_USER_TOKEN`:  user account token
-* `PREFIX`:  command prefix (default: `$`)
+* `DISCORD_BOT_TOKEN`:  Dedicated bot token
+* `DISCORD_USER_TOKEN`:  User account token
+* `PREFIX`:  Command prefix (default: `$`)
 * `LOCALE`:  (default: `en`)
+* `DATE_FORMAT`:  Date format (default: `calendar`)
+  - e.g. `DD/MM/YYYY HH:mm Z` results in `07/05/2017 08:52 -03:00`
+  - [documentation](https://momentjs.com/docs/#/displaying/format/)
+* `EMPTY_MESSAGE`: String that replaces message body when no text passed to command. (default: empty)
+* `SHOW_USER_DISCRIMINATOR`: Enables showing quoted user's discriminator number next to nickname (default: `true`)
+
 
 ---
 
