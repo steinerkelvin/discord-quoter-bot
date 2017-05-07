@@ -18,6 +18,8 @@ moment.locale(vars.LOCALE)
 SHOW_USER_DISCRIMINATOR = isTrue vars.SHOW_USER_DISCRIMINATOR
 
 
+DISCRIMINATOR_STRING = " #"
+
 CHANNEL_STRING = "in "
 if vars.LOCALE in ['pt', 'pt-BR'] then CHANNEL_STRING = "em "
 
@@ -136,8 +138,8 @@ class App
 
         author_name ?= qt_msg.author.username
 
-        if (discriminator = qt_msg.author.discriminator)
-          author_name += " " + strNumberToSubscript(discriminator)
+        if (SHOW_USER_DISCRIMINATOR and discriminator = qt_msg.author.discriminator)
+          author_name += DISCRIMINATOR_STRING + strNumberToSubscript(discriminator)
 
         opts =
           embed:
