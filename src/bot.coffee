@@ -21,7 +21,7 @@ DISCRIMINATOR_STRING = " #"
 CHANNEL_STRING = "in "
 if vars.LOCALE in ['pt', 'pt-BR'] then CHANNEL_STRING = "em "
 
-SERVER_STRING = "at "
+SERVER_STRING = "@"
 if vars.LOCALE in ['pt', 'pt-BR'] then SERVER_STRING = "@ "
 
 IMAGE_EXTENSIONS = ['jpeg', 'jpg', 'png', 'webp', 'gif']
