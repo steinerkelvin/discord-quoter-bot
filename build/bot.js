@@ -31,7 +31,7 @@
     CHANNEL_STRING = "em ";
   }
 
-  SERVER_STRING = "at ";
+  SERVER_STRING = "@ ";
 
   if ((ref2 = vars.LOCALE) === 'pt' || ref2 === 'pt-BR') {
     SERVER_STRING = "@ ";
@@ -218,7 +218,7 @@
               return true;
             }
           }));
-          res_text || (res_text = "·");
+          res_text || (res_text = "-");
           if (edit) {
             return message.edit(res_text, opts).then(function(res_message) {
               return lg("Message updated: " + res_message.content);
