@@ -1,6 +1,7 @@
 
 ### 0.0.3
 * environment variable for default string that replaces empty quote message
+* date format environment variable
 
 ### 0.0.2
 * edit messages by default
