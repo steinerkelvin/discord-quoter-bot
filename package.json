@@ -18,9 +18,12 @@
   "author": "Kelvin Santos",
   "license": "",
   "dependencies": {
-    "coffee-script": "^1.12.4",
-    "discord.js": "^11.0.0",
-    "moment-timezone": "^0.5.13",
-    "os-locale": "^2.0.0"
+    "coffeescript": "^2.2.1",
+    "discord.js": "^11.3.0",
+    "moment-timezone": "^0.5.14",
+    "os-locale": "^2.1.0"
+  },
+  "devDependencies": {
+    "foreman": "^2.0.0"
   }
 }
