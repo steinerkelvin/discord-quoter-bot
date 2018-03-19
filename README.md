@@ -1,5 +1,7 @@
 # node-discord-quoter-bot
 
+[![Join the chat at https://gitter.im/node-discord-quoter-bot/Lobby](https://badges.gitter.im/node-discord-quoter-bot/Lobby.svg)](https://gitter.im/node-discord-quoter-bot/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Selfbot for quoting other Discord users using commands.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
