@@ -1,10 +1,16 @@
+<div align="center">
+
 # node-discord-quoter-bot
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 [![Join the chat at https://gitter.im/node-discord-quoter-bot/Lobby](https://badges.gitter.im/node-discord-quoter-bot/Lobby.svg)](https://gitter.im/node-discord-quoter-bot/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Selfbot for quoting other Discord users using commands.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+<div align="center">
+
+![demo GIF](https://raw.githubusercontent.com/kelvinss/node-discord-quoter-bot/master/readme/pt_demo.gif)
+</div>
 
 Command: `$q <message ID> [reply content]`
 
