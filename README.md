@@ -7,10 +7,8 @@
 
 Selfbot for quoting other Discord users using commands.
 
-<div align="center">
-
 ![demo GIF](https://raw.githubusercontent.com/kelvinss/node-discord-quoter-bot/master/readme/pt_demo.gif)
-</div>
+
 
 Command: `$q <message ID> [reply content]`
 
