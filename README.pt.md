@@ -1,4 +1,3 @@
-
 <div align="center">
 
 # Bot Citador para Discord
